@@ -5,5 +5,5 @@ import { LoginSignup } from "./screens/LoginSignup";
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <LoginSignup />
-  </StrictMode>,
+  </StrictMode>
 );
