@@ -5,9 +5,9 @@
   "name": "imirror-web",
   "description": "A React web application for iMirror feedback platform",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
