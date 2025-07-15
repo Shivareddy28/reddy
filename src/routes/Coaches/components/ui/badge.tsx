@@ -1,65 +1,36 @@
-import { StarIcon } from "lucide-react";
-import React from "react";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../../components/ui/avatar";
-import { Button } from "../../components/ui/button";
-import { Card, CardContent } from "../../components/ui/card";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
-export const DoctorProfileSection = (): JSX.Element => {
-  // StarIcon rating data
-  const stars = Array(4).fill(null);
+import { cn } from "../../lib/utils"
 
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        secondary:
+          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        outline: "text-foreground",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
   return (
-    <div className="w-full py-4">
-      <Card className="relative shadow-[0px_0px_35.3px_#00000017] rounded-[20px]">
-        <CardContent className="p-6 flex items-start">
-          <Avatar className="w-[106px] h-[106px] mr-9">
-            <AvatarImage
-              src="https://c.animaapp.com/md3erymvxrsnOK/img/ellipse-16.png"
-              alt="Dr. Sarah Chen"
-            />
-            <AvatarFallback>SC</AvatarFallback>
-          </Avatar>
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  )
+}
 
-          <div className="flex flex-col">
-            <h2 className="font-bold text-2xl font-sans leading-7 mb-2">
-              Dr. Sarah Chen
-            </h2>
-
-            <p className="font-normal text-lg leading-5 mb-2">
-              Clinical Psychologist
-            </p>
-
-            <div className="flex items-center mb-3">
-              <span className="font-medium text-sm leading-5">
-                12 years exp |
-              </span>
-              <span className="font-normal text-sm leading-5 ml-2">
-                300+ Consultations
-              </span>
-            </div>
-
-            <div className="flex items-center">
-              {stars.map((_, index) => (
-                <StarIcon
-                  key={`star-${index}`}
-                  className="w-[18px] h-[18px] fill-current text-yellow-400 mr-1"
-                  strokeWidth={0}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="ml-auto">
-            <Button className="rounded-[25px] bg-[#74a4ee] border border-solid border-[#7fabef] h-11 w-[119px] font-medium">
-              Consult
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
+export { Badge, badgeVariants }
