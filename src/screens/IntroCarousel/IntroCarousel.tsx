@@ -141,6 +141,5 @@ export const IntroCarousel: React.FC = () => {
           Get Started
         </Button>
       </div>
-    
   );
 };
